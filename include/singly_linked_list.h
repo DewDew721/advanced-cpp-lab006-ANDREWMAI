@@ -121,6 +121,7 @@ bool SLinkedList<T>::pop_front() {
     SNode<T>* temp = head_;
     head_ = head_->next;
     delete temp;
+    --size_;
     return true;
 }
 
@@ -137,6 +138,7 @@ if (head_->next == nullptr)
 {
     delete head_;
     head_ = nullptr;
+    --size_;
     return true;
 }
 
@@ -146,6 +148,7 @@ while (temp->next->next != nullptr)
 }
 delete temp->next;
 temp->next = nullptr;
+--size_;
 return true;
 }
 

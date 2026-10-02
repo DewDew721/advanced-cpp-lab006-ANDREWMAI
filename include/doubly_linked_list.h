@@ -83,12 +83,35 @@ DLinkedList<T>::DLinkedList(const DLinkedList& other) : size_(0) {
 // TODO: Implement the assignment operator for the DLinkedList class.
 template <typename T>
 DLinkedList<T>& DLinkedList<T>::operator=(const DLinkedList& other) {
-
+if (this == &other)
+{
+    return *this;
+}
+clear();
+DNode<T>* current = other.header_->next;
+while (current != other.trailer_)
+{
+    push_back(current->value);
+    current = current->next;
+}
+return *this;
 }
 
 //TODO: Implement the push_front function for the DLinkedList class.
 template <typename T>
 void DLinkedList<T>::push_front(const T& value) {
+DNode<T>* newNode = new DNode<T>(value, header_, header_->next);
+header_->next = newNode;
+if (newNode->next != nullptr)
+{
+    newNode->next->prev = newNode;
+}
+else
+{
+    trailer_->prev = newNode;
+}
+header_->next = newNode;
+++size_;
 
 }
 
@@ -104,7 +127,8 @@ void DLinkedList<T>::push_back(const T& value) {
     {
         header_->next = newNode;
     }
-
+    trailer_->prev = newNode;
+    ++size_;
 }
 
 
@@ -127,6 +151,7 @@ bool DLinkedList<T>::pop_front() {
         trailer_->prev = header_;
     }
     delete temp;
+    --size_;
     return true;
 }
 
@@ -149,6 +174,7 @@ bool DLinkedList<T>::pop_back() {
         header_->next = trailer_;
     }
     delete temp;
+    --size_;
     return true;
 }
 
