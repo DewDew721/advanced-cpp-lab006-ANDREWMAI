@@ -70,6 +70,7 @@ DLinkedList<T>::DLinkedList(const DLinkedList& other) : size_(0) {
 
     DNode<T>* current = other.header_->next;
 
+    current = current->next;
     while (current != nullptr && current != other.trailer_)
     {
         push_back(current->value);
