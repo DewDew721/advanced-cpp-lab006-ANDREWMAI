@@ -74,6 +74,7 @@ if (other.head_ == nullptr)
     }
 
     size_ = other.size_;
+    return;
 }
 
 template <typename T>
@@ -83,6 +84,20 @@ SLinkedList<T>& SLinkedList<T>::operator=(const SLinkedList& other) {
     {
         return *this;
     }
+    clear();
+    if (other.head_ == nullptr)
+    {
+        head_ = nullptr;
+        size_ = 0;
+        return *this;
+    }
+    SNode<T>* currentOther = other.head_;
+    while (currentOther != nullptr)
+    {
+        push_back(currentOther->value);
+        currentOther = currentOther->next;
+    }
+    return *this;
 }
 
 template <typename T>
@@ -101,6 +116,7 @@ SNode<T>* newNode = new SNode<T>(value);
 if (head_ == nullptr)
 {
     head_ = newNode;
+    ++size_;
     return;
 }
 SNode<T>* current = head_;
@@ -109,6 +125,7 @@ while (current->next != nullptr)
     current = current->next;
 }
 current->next = newNode;
+++size_;
 }
 
 template <typename T>
