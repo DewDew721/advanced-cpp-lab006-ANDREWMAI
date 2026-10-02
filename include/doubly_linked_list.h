@@ -258,7 +258,7 @@ std::vector<T> DLinkedList<T>::to_vector() const {
 // TODO: Implement the to_vector function for the DLinkedList class
 std::vector<T> vec;
 DNode<T>* current = header_->next;
-while (current != trailer_)
+while (current != nullptr && current != trailer_)
 {
     vec.push_back(current->value);
     current = current->next;
