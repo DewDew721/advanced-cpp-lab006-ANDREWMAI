@@ -68,9 +68,7 @@ DLinkedList<T>::DLinkedList(const DLinkedList& other) : size_(0) {
         return;
     }
 
-    DNode<T>* current = other.header_->next;
-    this->header_ = new DNode<T>(T(), nullptr, nullptr);
-    this->trailer_ = new DNode<T>(T(), nullptr, nullptr);
+    DNode<T>* current = other.header_;
 
     current = current->next;
     while (current != nullptr && current != other.trailer_)
